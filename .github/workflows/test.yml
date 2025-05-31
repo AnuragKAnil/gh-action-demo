@@ -5,9 +5,13 @@ on:
 concurrency:
   group: test
   cancel-in-progress: true
+env:
+  test1: abc
 
 jobs:
   first-job:
+    env:
+      test2: def
     timeout-minutes: 1
     if: github.ref == 'refs/heads/main'
     strategy:
@@ -25,5 +29,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: step 1
-        run: echo "test"    
+        env:
+          test3: xyz
+        run: echo ${{ env.test1 }} ${{ env.test2 }} ${{ env.test3 }}  
         timeout-minutes: 1  
