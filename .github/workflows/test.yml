@@ -8,6 +8,7 @@ concurrency:
 
 jobs:
   first-job:
+    timeout-minutes: 1
     if: github.ref == 'refs/heads/main'
     strategy:
       fail-fast: true
